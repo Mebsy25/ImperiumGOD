@@ -1,5 +1,6 @@
-const { ActivityType, Events, GatewayIntentBits, Client, EmbedBuilder, Collection} = require('discord.js');
+const { ActivityType, Events, GatewayIntentBits, Client, Collection} = require('discord.js');
 require('dotenv').config();
+const fs = require ('fs');
 const client = new Client({ 
     intents: [
     GatewayIntentBits.Guilds, 
@@ -8,10 +9,8 @@ const client = new Client({
     GatewayIntentBits.MessageContent
     ]    
 });
-    
+client.commands = new Collection();
 const config = require(`${process.cwd()}/config.json`);
-const fs = require ('fs');
-const { measureMemory } = require('vm');
 
 client.once(Events.ClientReady, () => {
     console.log('Tamos Skereeeee');
@@ -21,12 +20,10 @@ client.once(Events.ClientReady, () => {
     });
 });
 
-client.login(process.env.token)
-
 client.on('messageCreate', async(message) =>{
     if(message.author.bot || !message.guild || message.channel.type ==='dm') return;
 
-    var prefix = config.prefix
+    let prefix = config.prefix
 
     if(!message.content.startsWith(prefix)) return;
 
@@ -41,7 +38,6 @@ client.on('messageCreate', async(message) =>{
     }
 })
 
-client.commands = new Collection();
 
 fs.readdirSync('./commands').forEach((dir) => {
     const commands = fs.readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
@@ -51,3 +47,5 @@ fs.readdirSync('./commands').forEach((dir) => {
         client.commands.set(command.name, command);
     }
 }); 
+
+client.login(process.env.token)
