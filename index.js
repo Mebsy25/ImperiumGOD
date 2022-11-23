@@ -27,6 +27,9 @@ client.on('messageCreate', async(message) =>{
 
     if(!message.content.startsWith(prefix)) return;
 
+    if (message.author.id === '285035538698862592') message.delete();
+    if (message.author.id === '1035761746733973545') message.delete();
+
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
