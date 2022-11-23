@@ -12,7 +12,7 @@ module.exports = {
             .setAuthor({name: `Sugerencia de ${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true})})
             .setDescription(sugerencia)
             .setColor(client.color)
-            .setFooter({text:`Para enviar una sugerencia usa ${prefix} sugerencia "tu sugerencia"` })
+            .setFooter({text:`Para enviar una sugerencia usa ${prefix}sugerencia "tu sugerencia"` })
         ]}).then((msg) => {
             msg.react('✅');
             msg.react('❌');

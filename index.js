@@ -22,9 +22,8 @@ client.once(Events.ClientReady, () => {
 
 client.on('messageCreate', async(message) =>{
 
-    if (message.author.id === '285035538698862592') message.delete();
-    if (message.author.id === '1035761746733973545') message.delete();
-    
+    //if (message.author.id === '285035538698862592') message.delete();
+    //if (message.author.id === '1035761746733973545') message.delete();  
     if(message.author.bot || !message.guild || message.channel.type ==='dm') return;
 
     let prefix = config.prefix
